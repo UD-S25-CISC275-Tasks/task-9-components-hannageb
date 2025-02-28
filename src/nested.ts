@@ -1,5 +1,6 @@
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
+import { makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -38,9 +39,9 @@ export function findQuestion(
     id: number,
 ): Question | null {
     let found = questions.find(
-            (question: Question): boolean => question.id === id
-        )
-    return found ? found : null
+        (question: Question): boolean => question.id === id,
+    );
+    return found ? found : null;
 }
 
 /**
@@ -59,7 +60,7 @@ export function removeQuestion(questions: Question[], id: number): Question[] {
  */
 export function getNames(questions: Question[]): string[] {
     let names: string[] = questions.map(
-        (question: Question): string => question.name
+        (question: Question): string => question.name,
     );
     return names;
 }
@@ -68,7 +69,10 @@ export function getNames(questions: Question[]): string[] {
  * Consumes an array of questions and returns the sum total of all their points added together.
  */
 export function sumPoints(questions: Question[]): number {
-    let sum: number = questions.reduce((sum: number, question: Question) => sum + question.points, 0);
+    let sum: number = questions.reduce(
+        (sum: number, question: Question) => sum + question.points,
+        0,
+    );
     return sum;
 }
 
@@ -77,9 +81,12 @@ export function sumPoints(questions: Question[]): number {
  */
 export function sumPublishedPoints(questions: Question[]): number {
     let published: Question[] = questions.filter(
-        (question: Question): boolean => question.published
+        (question: Question): boolean => question.published,
     );
-    let sum: number = published.reduce((sum: number, question: Question) => sum + question.points, 0);
+    let sum: number = published.reduce(
+        (sum: number, question: Question) => sum + question.points,
+        0,
+    );
     return sum;
 }
 
@@ -101,7 +108,13 @@ id,name,options,points,published
  * Check the unit tests for more examples!
  */
 export function toCSV(questions: Question[]): string {
-    return "";
+    let csv: string = questions
+        .map(
+            (question: Question): string =>
+                `${question.id},${question.name},${question.options.length},${question.points},${question.published}`,
+        )
+        .join("\n");
+    return `id,name,options,points,published\n` + csv;
 }
 
 /**
@@ -110,7 +123,8 @@ export function toCSV(questions: Question[]): string {
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    return [];
+    let answers: Answer[] = [];
+    return answers;
 }
 
 /***
@@ -118,7 +132,9 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    return questions.map(
+        (question: Question): Question => ({ ...question, published: true }),
+    );
 }
 
 /***
@@ -140,7 +156,7 @@ export function addNewQuestion(
     name: string,
     type: QuestionType,
 ): Question[] {
-    return [];
+    return [...questions, makeBlankQuestion(id, name, type)];
 }
 
 /***
