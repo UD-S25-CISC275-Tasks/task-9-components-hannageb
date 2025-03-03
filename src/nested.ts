@@ -1,6 +1,7 @@
+import { rename } from "fs";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { makeBlankQuestion } from "./objects";
+import { makeBlankQuestion, renameQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -185,7 +186,14 @@ export function renameQuestionById(
     targetId: number,
     newName: string,
 ): Question[] {
-    return [];
+    let renamed: Question = questions.map((q: Question): Question => {
+        if (q.id === targetId) {
+            return { ...q, name: newName };
+        } else {
+            return q;
+        }
+    });
+    return renamed;
 }
 
 /***
@@ -200,7 +208,18 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType,
 ): Question[] {
-    return [];
+    let changed = questions.map((q: Question) => {
+        if (q.id === targetId) {
+            if (newQuestionType === "multiple_choice_question") {
+                return { ...q, type: newQuestionType };
+            } else {
+                return { ...q, type: newQuestionType, options: [] };
+            }
+        } else {
+            return q;
+        }
+    });
+    return changed;
 }
 
 /**
@@ -233,5 +252,8 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number,
 ): Question[] {
+    // find q w/ targetid
+    // duplicate it
+    // insert it right after (find index & insert at index+1)
     return [];
 }
