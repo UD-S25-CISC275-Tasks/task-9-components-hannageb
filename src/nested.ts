@@ -1,7 +1,11 @@
 import { rename } from "fs";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { makeBlankQuestion, renameQuestion } from "./objects";
+import {
+    duplicateQuestion,
+    makeBlankQuestion,
+    renameQuestion,
+} from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -238,7 +242,24 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string,
 ): Question[] {
-    return [];
+    return questions.map((q: Question): Question => {
+        if (q.id === targetId) {
+            let newOptions: string[] = q.options;
+            if (targetOptionIndex === -1) {
+                newOptions = [...newOptions, newOption];
+                return { ...q, options: newOptions };
+            } else {
+                newOptions = [
+                    ...newOptions.slice(0, targetOptionIndex),
+                    newOption,
+                    ...newOptions.slice(targetOptionIndex + 1),
+                ];
+                return { ...q, options: newOptions };
+            }
+        } else {
+            return q;
+        }
+    });
 }
 
 /***
@@ -252,8 +273,10 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number,
 ): Question[] {
-    // find q w/ targetid
-    // duplicate it
-    // insert it right after (find index & insert at index+1)
-    return [];
+    let index = questions.findIndex(
+        (q: Question): boolean => q.id === targetId,
+    );
+    let question = questions[index];
+    let duplicate = duplicateQuestion(newId, question);
+    return [...questions.slice(0, index + 1), duplicate, ...questions.slice(index + 1)];
 }
