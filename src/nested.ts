@@ -1,4 +1,3 @@
-import { rename } from "fs";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 import {
@@ -190,9 +189,9 @@ export function renameQuestionById(
     targetId: number,
     newName: string,
 ): Question[] {
-    let renamed: Question = questions.map((q: Question): Question => {
+    let renamed = questions.map((q: Question): Question => {
         if (q.id === targetId) {
-            return { ...q, name: newName };
+            return renameQuestion(q, newName);
         } else {
             return q;
         }
@@ -278,5 +277,9 @@ export function duplicateQuestionInArray(
     );
     let question = questions[index];
     let duplicate = duplicateQuestion(newId, question);
-    return [...questions.slice(0, index + 1), duplicate, ...questions.slice(index + 1)];
+    return [
+        ...questions.slice(0, index + 1),
+        duplicate,
+        ...questions.slice(index + 1),
+    ];
 }
