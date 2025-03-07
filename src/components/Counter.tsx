@@ -6,14 +6,7 @@ export function Counter(): React.JSX.Element {
 
     return (
         <span>
-            <Button
-                onClick={() => {
-                    setValue(1 + value);
-                }}
-            >
-                {" "}
-                Add One
-            </Button>
+            <Button onClick={() => {setValue(1 + value);}}>{" "}Add One</Button>
             to {value}.
         </span>
     );
