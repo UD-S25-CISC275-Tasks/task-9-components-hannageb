@@ -9,7 +9,14 @@ import { Button } from "react-bootstrap";
  * The second button should include the text Year somewhere (e.g., Advance by Year) and changes the current holiday to the next one in the year.
  */
 
+export type Holiday =
+    | "Lunar New Year"
+    | "Eid al-Adha"
+    | "Christmas"
+    | "Ramadan"
+    | "Valentine's Day";
 
 export function CycleHoliday(): React.JSX.Element {
+    const [holiday, setHoliday] = useState<Holiday>();
     return <div>Cycle Holiday</div>;
 }
