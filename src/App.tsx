@@ -3,9 +3,9 @@ import "./App.css";
 import { RevealAnswer } from "./components/RevealAnswer";
 import { ChangeType } from "./components/ChangeType";
 import { StartAttempt } from "./components/StartAttempt";
-/*import { TwoDice } from "./components/TwoDice";
+import { TwoDice } from "./components/TwoDice";
 import { CycleHoliday } from "./components/CycleHoliday";
-*/ import { Counter } from "./components/Counter";
+import { Counter } from "./components/Counter";
 
 function App(): React.JSX.Element {
     return (
@@ -22,9 +22,9 @@ function App(): React.JSX.Element {
             <hr />
             <StartAttempt></StartAttempt>
             <hr />
-            {/*<TwoDice></TwoDice>
+            <TwoDice></TwoDice>
             <hr />
-            <CycleHoliday></CycleHoliday>*/}
+            <CycleHoliday></CycleHoliday>
         </div>
     );
 }

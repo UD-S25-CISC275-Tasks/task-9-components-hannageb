@@ -44,8 +44,8 @@ export function TwoDice(): React.JSX.Element {
             >
                 Roll Right
             </Button>
-            {die1 === die2 && die1 != 1 ? <span>Win</span> : <span>Roll Again</span>}
-            {die1 === 1 && die2 === 1 ? <span>Lose</span> : <span>Roll Again</span>}
+            {die1 === die2 && die1 != 1 ? <span>Win</span> : <span></span>}
+            {die1 === 1 && die2 === 1 ? <span>Lose</span> : <span></span>}
         </div>
     );
 }

@@ -9,14 +9,40 @@ import { Button } from "react-bootstrap";
  * The second button should include the text Year somewhere (e.g., Advance by Year) and changes the current holiday to the next one in the year.
  */
 
-export type Holiday =
-    | "Lunar New Year"
-    | "Eid al-Adha"
-    | "Christmas"
-    | "Ramadan"
-    | "Valentine's Day";
+export type Holiday = "🧧" | "🐑" | "🎄" | "🌙" | "💌";
 
+export function alphabetical(holiday: Holiday): Holiday {
+    let arrSorted: Holiday[] = ["🎄", "🐑", "🧧", "🌙", "💌"];
+    return arrSorted[(arrSorted.indexOf(holiday) + 1) % 5];
+}
+
+export function nextHoliday(holiday: Holiday): Holiday {
+    let arrSorted: Holiday[] = ["💌", "🧧", "🌙", "🐑", "🎄"];
+    return arrSorted[(arrSorted.indexOf(holiday) + 1) % 5];
+}
 export function CycleHoliday(): React.JSX.Element {
-    const [holiday, setHoliday] = useState<Holiday>();
-    return <div>Cycle Holiday</div>;
+    const [holiday, setHoliday] = useState<Holiday>("🌙");
+    return (
+        <div>
+            Cycle Holiday
+            <p>Holiday: {holiday}</p>
+            <Button
+                onClick={() => {
+                    setHoliday(alphabetical(holiday));
+                }}
+            >
+                Advance by Alphabet
+            </Button>
+            <Button
+                onClick={() => {
+                    setHoliday(nextHoliday(holiday));
+                }}
+            >
+                Advance by Year
+            </Button>
+            <p>
+                
+            </p>
+        </div>
+    );
 }
