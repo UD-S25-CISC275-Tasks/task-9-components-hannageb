@@ -40,9 +40,7 @@ export function CycleHoliday(): React.JSX.Element {
             >
                 Advance by Year
             </Button>
-            <p>
-                
-            </p>
+            <p></p>
         </div>
     );
 }
